@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node\Expr\Cast\Bool_;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
 class Arena extends Model implements HasMedia
 {
@@ -35,8 +36,16 @@ class Arena extends Model implements HasMedia
             1 => 'Active'
         ][$input];
     }
+    public function isActive(){
+        return $this::where('status', '0');
+    }
 
     public function booking(){
         return $this->hasOne(Booking::class, 'arena_id');
+    }
+
+    public function tempats(){
+        return $this->belongsTo(Tempat::class, 'tempat_id');
+
     }
 }

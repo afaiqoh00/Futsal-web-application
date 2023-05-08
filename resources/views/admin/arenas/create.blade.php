@@ -35,14 +35,28 @@
                         <label for="price">{{ __('Harga per Jam') }}</label>
                         <input type="number" class="form-control" id="price" placeholder="{{ __('price') }}" name="price" value="{{ old('price') }}" />
                     </div>
+                    <div class="form-group">
+                        <label for="tempat">Tempat</label>
+                        <select class="js-example-basic-single form-control" name="tempat_id">
+                            <option value="">Pilih Tempat</option>
+                            @foreach ($tempats as $tempat)
+                                <option value="{{ $tempat->id }}">{{ $tempat->name }}</option>
+                            @endforeach
+                          </select>
+                    </div>
                     <div class="form-group {{ $errors->has('photo') ? 'has-error' : '' }}">
                         <label for="photo">Photo</label>
-                        <div class="needsclick dropzone" id="photo-dropzone">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input"  name="image" value="{{ old('image')}}" required>
+                            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                            <div class="invalid-feedback">Example invalid custom file feedback</div>
+                          </div>
+                        {{-- <div class="needsclick dropzone" id="photo-dropzone"> --}}
 
                         </div>
-                        @if($errors->has('photo'))
+                        @if($errors->has('image'))
                             <em class="invalid-feedback">
-                                {{ $errors->first('photo') }}
+                                {{ $errors->first('image') }}
                             </em>
                         @endif
                     </div>
@@ -69,6 +83,7 @@
 @endpush
 
 @push('script-alt')
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 <script>
     Dropzone.options.photoDropzone = {
@@ -122,5 +137,9 @@
             return _results
         }
     }
+    // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
 </script>
 @endpush

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\Admin\ArenaRequest;
+use App\Models\Tempat;
 
 class ArenaController extends Controller
 {
@@ -18,7 +19,7 @@ class ArenaController extends Controller
      */
     public function index()
     {
-        $arenas = Arena::all();
+        $arenas = Arena::with('tempats')->get();
 
         return view('admin.arenas.index', compact('arenas'));
     }
@@ -30,7 +31,8 @@ class ArenaController extends Controller
      */
     public function create()
     {
-        return view('admin.arenas.create');
+        $tempats = Tempat::all();
+        return view('admin.arenas.create', compact('tempats'));
     }
 
     /**
@@ -41,11 +43,20 @@ class ArenaController extends Controller
      */
     public function store(ArenaRequest $request)
     {
-        $arena = Arena::create($request->validated());
-        
-        if ($request->input('photo', false)) {
-            $arena->addMedia(storage_path('tmp/uploads/' . $request->input('photo')))->toMediaCollection('photo');
-        }
+
+        $fileName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('public/images', $fileName);
+        $arena = new Arena;
+        $arena->number = $request->number;
+        $arena->tempat_id = $request->tempat_id;
+        $arena->price = $request->price;
+        $arena->image = $fileName;
+        $arena->status = $request->status;
+        $arena->save();
+        // $user = new User;
+        // if ($request->input('photo', false)) {
+        //     $arena->addMedia(storage_path('tmp/uploads/' . $request->input('photo')))->toMediaCollection('photo');
+        // }
 
         return redirect()->route('admin.arenas.index')->with([
             'message' => 'successfully created !',

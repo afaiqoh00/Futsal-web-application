@@ -26,6 +26,10 @@ Route::get('booking/success/{date}', [\App\Http\Controllers\BookingController::c
 
 Route::group(['middleware' => ['isAdmin','auth'],'prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('tempat', [\App\Http\Controllers\Admin\TempatController::class,'index']);
+    Route::post('post-tempat', [\App\Http\Controllers\Admin\TempatController::class,'store']);
+    Route::post('edit-tempat/{id}', [\App\Http\Controllers\Admin\TempatController::class,'update']);
+    
     Route::resource('permissions', \App\Http\Controllers\Admin\PermissionController::class);
     Route::delete('permissions_mass_destroy', [\App\Http\Controllers\Admin\PermissionController::class, 'massDestroy'])->name('permissions.mass_destroy');
     Route::resource('roles', \App\Http\Controllers\Admin\RoleController::class);

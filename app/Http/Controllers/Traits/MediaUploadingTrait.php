@@ -14,6 +14,7 @@ trait MediaUploadingTrait
                 'file' => 'max:' . request()->input('size') * 1024,
             ]);
         }
+        dd($request->all());
 
 // If width or height is preset - we are validating it as an image
         if (request()->has('width') || request()->has('height')) {

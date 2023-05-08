@@ -7,6 +7,7 @@ use App\Models\Arena;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\BookingRequest;
+use App\Models\Tempat;
 
 class BookingController extends Controller
 {
@@ -26,6 +27,8 @@ class BookingController extends Controller
     public function index(Request $request){
 
         $bookings = [];
+        $tempats = Tempat::with('arenas')->get();
+
         $arenas = Arena::where('status',1)->get();
 
         foreach ($this->sources as $source) {
@@ -52,7 +55,7 @@ class BookingController extends Controller
             }
         }
 
-        return view('welcome', compact('arenas', 'bookings'));
+        return view('welcome', compact('arenas', 'bookings', 'tempats'));
     }
 
     public function booking(Request $request){
@@ -67,7 +70,12 @@ class BookingController extends Controller
     {
         $arena = Arena::findOrFail($request->arena_id);
 
-        
+
+        $request->validate([
+            'filename' => 'required',
+            'filename.*' => 'mimes:doc,docx,PDF,pdf,jpg,jpeg,png|max:2000'
+        ]);
+
 
         $orderDate = date('Y-m-d H:i:s');
         $paymentDue = (new \DateTime($orderDate))->modify('+1 hour')->format('Y-m-d H:i:s');
@@ -75,7 +83,7 @@ class BookingController extends Controller
         $booking = Booking::create($request->validated() + [
             'user_id' => auth()->id(),
             'grand_total' => $arena->price,
-            'status' => !isset($request->status) ? 0 : $request->status
+            'status' => !isset($request->status) ? 0 : $request->status,
         ]);
 
         return redirect()->route('booking.success', [$paymentDue])->with([

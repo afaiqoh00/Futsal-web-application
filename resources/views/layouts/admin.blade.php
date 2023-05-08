@@ -13,6 +13,7 @@
      <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Admin Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- Custom fonts for this template-->
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -155,6 +156,7 @@
 
     <!-- Page level plugins -->
     <script src="{{ asset('backend/vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>

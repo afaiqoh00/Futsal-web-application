@@ -34,7 +34,7 @@
     <body class="antialiased">
         <nav class="navbar navbar-expand-lg navbar-light bg-primary text-white">
             <div class="container">
-                <a class="navbar-brand text-white" href="#">Booking Futsal</a>
+                <a class="navbar-brand text-white" href="#">Brayan Badminton</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -72,8 +72,8 @@
                 @foreach($arenas as $arena)      
                     <div class="col-lg-4 mb-5">
                         <div class="card" style="width: 18rem;">
-                        @if($arena->photo)
-                            <img src="{{ $arena->photo->getUrl() }}" class="card-img-top" alt="...">
+                        @if($arena->image)
+                            <img src="{{ asset('storage/images/'.$arena->image) }}" class="card-img-top" alt="...">
                         @endif
                         <div class="card-body">
                             <h5 class="card-title">Nomer Lapangan : {{ $arena->number }}</h5>
