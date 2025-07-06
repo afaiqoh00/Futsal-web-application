@@ -16,6 +16,11 @@ class CreateTempatsTable extends Migration
         Schema::create('tempats', function (Blueprint $table) {
             $table->id();
             $table->text('name');
+            $table->text('operator');
+            $table->text('maps');
+            $table->text('tutup');
+            $table->text('waa');
+            
             $table->timestamps();
         });
     }

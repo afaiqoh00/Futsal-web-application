@@ -8,6 +8,8 @@ use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BookingRequest;
+use App\Models\Order;
+
 
 class BookingController extends Controller
 {
@@ -22,6 +24,8 @@ class BookingController extends Controller
 
         return view('admin.bookings.index', compact('bookings'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.

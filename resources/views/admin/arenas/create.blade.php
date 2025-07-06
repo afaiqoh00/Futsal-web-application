@@ -59,15 +59,17 @@
                                 {{ $errors->first('image') }}
                             </em>
                         @endif
-                    </div>
+                    
                     <div class="form-group">
                         <label for="status">{{ __('Status') }}</label>
                         <select name="status" id="status" class="form-control">
                             <option value="1">Active</option>
                             <option value="0">In Active</option>
                         </select>
-                    </div>
+                    <br>
                     <button type="submit" class="btn btn-primary btn-block">{{ __('Save') }}</button>
+                    </div>
+                    </div>
                 </form>
             </div>
         </div>

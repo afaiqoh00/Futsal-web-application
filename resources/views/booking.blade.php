@@ -1,31 +1,127 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+<script type="text/javascript"
+src="https://app.sandbox.midtrans.com/snap/snap.js"
+data-client-key="SET_YOUR_CLIENT_KEY_HERE"></script>
+<title>Laravel</title>
+<!-- CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Laravel</title>
+<title>{{ config('app.name', 'Brayan') }}</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}" defer></script>
 
-        <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-        <!-- Styles -->
-        <style>
-            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-t{border-top-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.dark\:text-gray-500{--tw-text-opacity:1;color:#6b7280;color:rgba(107,114,128,var(--tw-text-opacity))}}
-        </style>
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+<!-- Icon Font Stylesheet -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Libraries Stylesheet -->
+<link href="{{ asset('lib/animate/animate.min.css')}}" rel="stylesheet">
+<link href="{{ asset('ib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+
+
+<!-- Styles -->
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/login.css') }}" rel="stylesheet"> -->
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     </head>
     <body class="antialiased">
-    <nav class="navbar navbar-light bg-primary d-flex justify-content-center">
-        <a class="navbar-brand text-white" href="/">Booking Futsal</a>
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h2 class="m-0 text-primary"></i>Brayan Badminton</h2>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link text-dark ">Home</a>
+                <a href="about.html" class="nav-item nav-link text-dark">About</a>
+                <a href="courses.html" class="nav-item nav-link active text-primary">Booking</a>
+                <!-- <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu fade-down m-0">
+                        <a href="team.html" class="dropdown-item">Our Team</a>
+                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="404.html" class="dropdown-item">404 Page</a>
+                    </div>
+                </div> -->
+                <a href="contact.html" class="nav-item nav-link text-dark">Contact</a>
+                <style>
+                    .btn-primary:hover {
+                    color: #000;
+                    background-color: #2bc5d4;
+                    border-color: #1fc2d1;
+                    }
+                </style>
+                @guest
+                <a href="{{ route('login') }}" class=" login btn btn-primary py-4 px-lg-5 d-lg-block nav-item nav-link">LOGIN
+                <i class="fa fa-arrow-right ms-3"></i>
+                </a>
+                @endguest
+                @auth
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><img
+            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            class="rounded-circle"
+            height="22"
+            alt="Portrait of a Woman"
+            loading="lazy"
+          />{{ auth()->user()->name }}</a>
+                    <div class="dropdown-menu fade-down m-0">
+                        <a href="#" class="dropdown-item">Profile</a>
+                        <a href="#" class="dropdown-item">Setting</a>
+                        <li><hr class="dropdown-divider bg-p"></li>
+                        <a href="#" class="dropdown-item text-danger" onclick="event.preventDefault();document.getElementById('logout-form').submit();" href="">Logout</a> 
+                        <form id="logout-form" action="{{ route('logout') }}" method="post">
+                        @csrf
+                        </form>
+    <!-- <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        <a href="404.html" class="dropdown-item">404 Page</a> -->
+                    </div>
+                </div>
+                        <!-- <li class="nav-item dropdown mr-5">
+                            <a class="login btn btn-primary nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                {{ auth()->user()->name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();" href="">Logout</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li> -->
+                        @endauth
+                
+            </div>
+            <!-- @guest -->
+                <!-- <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('register') }}">Register</a>
+                </li>
+                <li class="nav-item"> -->
+                    <!-- <a class="btn btn-primary py-4 px-lg-5 d-none d-lg-block" href="{{ route('login') }}">LOGIN
+                    <i class="fa fa-arrow-right ms-3"></i>
+                    </a> -->
+                <!-- </li> -->
+            <!-- @endguest -->
+            <!-- <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">LOGIN<i class="fa fa-arrow-right ms-3"></i></a> -->
+        </div>
+        
     </nav>
       <div class="container my-5">
 
@@ -43,30 +139,49 @@
                     <div class="card shadow">
                         <div class="card-header">
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">{{ __('create booking') }}</h1>
+                                <h1 class="h3 mb-0 text-gray-800">{{ __('CREATE BOOKING') }}</h1>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('booking.store') }}" method="POST">
-                                @csrf
+                            {{-- <form action="{{ url('/booking') }}" method="POST" enctype="">
+                                @csrf --}}
+                                <input type="text" name="tempat_id" id="tempat_id" value="{{ $arenas->tempat_id }}" hidden>
+                                <div class="form-group mb-2">
+                                    <label for="time_from">Nama</label>
+                                    <input type="text" class="form-control " id="name" name="name" value="{{ old('name') }}" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="time_from">Alamat</label>
+                                    <input type="text" class="form-control " id="adress" name="adress" value="{{ old('adress') }}" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="time_from">Phone</label>
+                                    <input type="number" class="form-control " id="phone" name="phone" value="{{ old('phone') }}" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="time_from">Harga</label>
+                                    <input type="hidden" value="{{ $arenas->price }}" id="price_hour">
+                                    <input type="text" class="form-control " id="total_price" name="total_price" value="{{ $arenas->price }}" readonly/>
+                                </div>
                                 <div class="form-group mb-2">
                                     <label for="arena_id">{{ __('Nomer Lapangan') }}</label>
                                     <select name="arena_id" id="arena_id" class="form-control">
-                                        @foreach($arenas as $arena)
-                                            <option {{ $arenaNumber == $arena->number ? 'selected' : null }} value="{{ $arena->id }}">{{ $arena->number }}</option>
-                                        @endforeach
+                                            <option selected value="{{ $arenas->id }}">{{ $arenas->number }}</option>
                                     </select>
                                 </div>
+
+
                                 <div class="form-group mb-2">
                                     <label for="time_from">{{ __('Jam Mulai') }}</label>
-                                    <input type="text" class="form-control datetimepicker" id="time_from" name="time_from" value="{{ old('time_from') }}" />
+                                    <input type="text" onclick="date_from()" class="form-control datetimepicker" id="time_from" name="time_from" value="{{ old('time_from') }}" />
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="time_to">{{ __('Jam Berakhir') }}</label>
-                                    <input type="text" class="form-control datetimepicker" id="time_to" name="time_to" value="{{ old('time_to') }}" />
+                                    <input type="text" onclick="date_from()" onclick="" class="form-control datetimepicker" id="time_to" name="time_to" value="{{ old('time_to') }}" />
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">{{ __('Booking') }}</button>
-                            </form>
+                                <a href='javascript:void(0)' onclick="updatePrice()" id="check-harga" class="btn btn-success">Check Harga</a>
+                                <button hidden type="submit" id='btn-block' class="btn btn-primary btn-block">{{ __('Booking') }}</button>
+                             </form>
                         </div>
                     </div>
                 </div>
@@ -76,9 +191,113 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js" integrity="sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function date_from(){
+            document.getElementById('btn-block').setAttribute("hidden", true);
+            document.getElementById('check-harga').removeAttribute("hidden");
+
+        }
+
+
+        function updatePrice(){
+            var from = document.getElementById('time_from').value.split(' ')[1];
+            var to = document.getElementById('time_to').value.split(' ')[1];
+
+            var result = diff(from, to);
+            var hour = result.split(':')[0];
+
+            if (hour === undefined) {
+                console.log("This is undefined");
+            }
+
+            s = hour.replace(/^0+/, '');
+
+            if(s < 1  ){
+                return alert('Minimal Pesan Satu Jam!');
+            }
+
+            var price = document.getElementById('price_hour').value * s;
+            console.log(price);
+            document.getElementById('total_price').value = price;
+            document.getElementById('btn-block').removeAttribute("hidden");
+            document.getElementById('check-harga').setAttribute("hidden", true);
+
+
+        }
+
+
+        function diff(start, end) {
+            start = start.split(":");
+            end = end.split(":");
+            var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+            var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+            var diff = endDate.getTime() - startDate.getTime();
+            var hours = Math.floor(diff / 1000 / 60 / 60);
+            diff -= hours * 1000 * 60 * 60;
+            var minutes = Math.floor(diff / 1000 / 60);
+
+            // If using time pickers with 24 hours format, add the below line get exact hours
+            if (hours < 0)
+            hours = hours + 24;
+
+            return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
+        }
+        console.log('asw2');
+
+        $("button").click(function() {
+            // var name     = $("input[name=name]").val();
+            // var password = $("input[name=password]").val();
+            // var email    = $("input[name=email]").val();
+            var name     =  $('#name').val();
+            var adress =  $('#adress').val();
+            var phone =  $('#phone').val();
+            var tempat_id =  $('#tempat_id').val();
+            var arena_id =  $('#arena_id').val();
+            var total_price =  $('#total_price').val();
+            var time_from =  $('#time_from').val();
+            var time_to =  $('#time_to').val();
+
+            $.ajax({
+                type:'POST',
+                url:"{{ url('/booking') }}",
+                data:{name:name, adress:adress, phone:phone, tempat_id:tempat_id, arena_id:arena_id, total_price:total_price, time_from:time_from, time_to:time_to},
+
+                success:function(data){
+                    window.snap.pay(data.token);
+
+                }
+            });
+            // $.post("/booking", {
+                // name: $('#name'),
+                // adress: $('#adress'),
+                // phone: $('#phone'),
+                // tempat_id: $('#tempat_id'),
+                // arena_id: $('#arena_id'),
+                // total_price: $('#total_price'),
+                // time_from: $('#time_from'),
+                // time_to: $('#time_to'),
+            // },
+
+            // function(data,status) {
+            //     console.log(data);
+            // });
+        });
+
+        // <button id="pay-button">Pay!</button>
+
+
+        var dateToday = new Date();
         $('.datetimepicker').datetimepicker({
+            minDate: dateToday,
             format: 'YYYY-MM-DD HH:mm',
             locale: 'en',
             sideBySide: true,
@@ -88,7 +307,7 @@
             previous: 'fas fa-chevron-left',
             next: 'fas fa-chevron-right'
             },
-            stepping: 10
+            stepping: 60
         });
     </script>
     </body>

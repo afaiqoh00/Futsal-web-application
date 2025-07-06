@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\Admin\ArenaRequest;
 use App\Models\Tempat;
-
+use Illuminate\Support\Facedes\File;
 class ArenaController extends Controller
 {
     use MediaUploadingTrait;
@@ -44,13 +44,21 @@ class ArenaController extends Controller
     public function store(ArenaRequest $request)
     {
 
-        $fileName = time() . '.' . $request->image->extension();
-        $request->image->storeAs('public/images', $fileName);
+        if($request->file('image'))
+        {
+            $file = $request->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time(). '.' .$extention;
+            $file->move('images/arena/', $filename);
+            
+        }
+
+        // $request->image->storeAs('public/images', $fileName);
         $arena = new Arena;
         $arena->number = $request->number;
         $arena->tempat_id = $request->tempat_id;
         $arena->price = $request->price;
-        $arena->image = $fileName;
+        $arena->image = $filename;
         $arena->status = $request->status;
         $arena->save();
         // $user = new User;
@@ -93,20 +101,35 @@ class ArenaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ArenaRequest $request,Arena $arena)
+    public function update(ArenaRequest $request, $id)
     {
-        $arena->update($request->validated());
-
-        if ($request->input('photo', false)) {
-            if (!$arena->photo || $request->input('photo') !== $arena->photo->file_name) {
-                $arena->addMedia(storage_path('tmp/uploads/' . $request->input('photo')))->toMediaCollection('photo');
+        
+        $arena = Arena::find($id);
+        if($request->file('image'))
+        {
+            $destination = 'images/arena/'. $arena->image;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
             }
-        } elseif ($arena->photo) {
-            $arena->photo->delete();
+            $file = $request->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time(). '.' .$extention;
+            $file->move('images/arena/', $filename);
+            $arena->image = $filename;
+            
         }
-
+        // $request->image->storeAs('public/images', $fileName);
+        $arena = new Arena;
+        $arena->number = $request->number;
+        $arena->tempat_id = $request->tempat_id;
+        $arena->price = $request->price;
+       
+        $arena->status = $request->status;
+        $arena->update();
+dd($arena);
         return redirect()->route('admin.arenas.index')->with([
-            'message' => 'successfully updated !',
+            'message' => 'successfully created !',
             'alert-type' => 'success'
         ]);
     }

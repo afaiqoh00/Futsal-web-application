@@ -51,7 +51,7 @@
                                 <td>
                                     @if($arena->image)
                                         <a href="/" target="_blank">
-                                            <img src="{{ asset('storage/images/'.$arena->image) }}" width="50px" height="50px">
+                                            <img src="{{ asset('images/arena/'.$arena->image) }}" width="50px" height="50px">
                                         </a>
                                     @endif
                                 </td>

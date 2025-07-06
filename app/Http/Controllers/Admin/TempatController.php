@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Tempat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
+
 
 class TempatController extends Controller
 {
+    use MediaUploadingTrait;
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +20,7 @@ class TempatController extends Controller
     {
         $datas = Tempat::all();
 
-        return view('admin.tempat', compact('datas'));
+        return view('admin.tempats.tempat', compact('datas'));
     }
 
     /**
@@ -27,7 +30,8 @@ class TempatController extends Controller
      */
     public function create()
     {
-        //
+        $tempats = Tempat::all();
+        return view('admin.tempats.create', compact('tempats'));
     }
 
     /**
@@ -38,13 +42,22 @@ class TempatController extends Controller
      */
     public function store(Request $request)
     {
-        $fileName = time() . '.' . $request->image->extension();
-        $request->image->storeAs('public/images', $fileName);
-        
+        if($request->file('image'))
+        {
+            $file = $request->file('image');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time(). '.' .$extention;
+            $file->move('images/tempat/', $filename);
+            
+        }
         $data = $request->all();
         $tempat = new Tempat;
         $tempat->name = $data['tempat'];
-        $tempat->image = $fileName;
+        $tempat->image = $filename;
+        $tempat->operator = $request->operator;
+        $tempat->maps = $request->maps;
+        $tempat->tutup = $request->tutup;
+        $tempat->waa = $request->waa;
         $tempat->save();
         return redirect()->back();
 
@@ -67,9 +80,10 @@ class TempatController extends Controller
      * @param  \App\Models\Tempat  $tempat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tempat $tempat)
+    public function edit(Tempat $id)
     {
-        //
+        $tempat = Tempat::find($id);
+        return view('tempat.edit', compact('tempats'));
     }
 
     /**
@@ -92,8 +106,10 @@ class TempatController extends Controller
      * @param  \App\Models\Tempat  $tempat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tempat $tempat)
+    public function massDestroy(Request $request)
     {
-        //
+        Tempat::whereIn('id', request('ids'))->delete();
+
+        return response()->noContent();
     }
 }
